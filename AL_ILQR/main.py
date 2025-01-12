@@ -32,15 +32,15 @@ if __name__ == '__main__':
 
     #state contains [x y v theta]
     #input contains [a dtheta]
-    ego = Agent(0, 0, 0.2, 0, 0, 0)
-    game_agent = Agent(20, 0, 3, math.pi, 0, 0)
+    ego = Agent(0, 0, 3, 0, 0, 0)
+    game_agent = Agent(0, 0, 1, 0, 0, 0)
 
-    game_agent_traj = game_agent.init_game_agent_traj(horizon,dt)
+    reference_line = game_agent.init_game_agent_traj(horizon,dt)
 
 
     u0 = np.zeros([2,horizon])
     ilqr = Ilqr(max_iter,horizon,dt)
-    init_traj,history_traj,valid_index = ilqr.optimize(ego,game_agent_traj,u0)
+    init_traj,history_traj,valid_index = ilqr.optimize(ego,reference_line,u0)
 
 
     fig= plt.figure(figsize=(20,5))  # 生成画布
